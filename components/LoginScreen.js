@@ -1,10 +1,12 @@
 "use client";
 
 import { signIn } from "next-auth/react";
+import { Sprout } from "lucide-react";
 
 export default function LoginScreen() {
   return (
-    <div className="login-screen">
+    <div className="login-screen fade-in">
+      <Sprout size={32} color="var(--color-accent)" />
       <h1>
         A quiet place to track your <span style={{ color: "var(--color-accent)" }}>growth</span>.
       </h1>
