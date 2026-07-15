@@ -1,13 +1,28 @@
 # Ground — a quiet personal growth tracker
 
-Time tracking, a daily journal, and habit streaks — all stored as a single
-JSON file in **your own Google Drive**. There's no database and no third
-server: this app just reads and writes one file it creates in your Drive,
-using a scope (`drive.file`) that only lets it see files it made itself —
-never anything else in your Drive.
+Time tracking (with tags, colors, and focus-session alarms), a daily journal
+(with titles and a mini to-do tally), and habit streaks with a LeetCode-style
+heatmap — all stored as a single JSON file in **your own Google Drive**.
+There's no database and no third server: this app just reads and writes one
+file it creates in your Drive, using a scope (`drive.file`) that only lets it
+see files it made itself — never anything else in your Drive.
 
 It's a real Next.js app, meant to be deployed on **Vercel's free Hobby
 tier**, which costs nothing for personal use like this.
+
+### What's in each section
+
+- **Time** — create colored tags (e.g. "Studying"), log sessions under a
+  specific session type (e.g. "ML", "DBMS"), and review the month either by
+  tag or by individual session type. A "Focus session" mode lets you set a
+  duration and get an in-browser alarm + notification when it's up (keep the
+  tab open for the alarm to fire).
+- **Journal** — a title + free-write per day, plus a small daily to-do list.
+  Marking a to-do done or not-done feeds a lifetime green/red tally at the
+  top of the page.
+- **Habits** — tap the circle to mark a habit done today, scroll the
+  horizontal heatmap to see your history LeetCode-style, and use "Edit
+  habits" to add or remove ones without cluttering the daily view.
 
 ---
 
@@ -129,10 +144,22 @@ your own Google Drive (search for it there any time). It looks like:
 
 ```json
 {
-  "timeEntries": [{ "id": "...", "category": "Deep work", "startedAt": 0, "endedAt": 0 }],
+  "tags": [{ "id": "...", "name": "Studying", "color": "#5B7A62" }],
+  "timeEntries": [
+    { "id": "...", "tagId": "...", "sessionType": "ML", "startedAt": 0, "endedAt": 0, "mode": "open" }
+  ],
   "activeTimer": null,
-  "journalEntries": [{ "id": "...", "date": "2026-07-08", "text": "..." }],
-  "habits": [{ "id": "...", "name": "Read 10 pages" }],
+  "focusSession": null,
+  "journalEntries": [
+    {
+      "id": "...",
+      "date": "2026-07-08",
+      "title": "A slow Tuesday",
+      "text": "...",
+      "todos": [{ "id": "...", "text": "Finish reading", "status": "done" }]
+    }
+  ],
+  "habits": [{ "id": "...", "name": "Read 10 pages", "color": "#5B7A62" }],
   "habitLogs": { "habit-id": ["2026-07-08"] }
 }
 ```
